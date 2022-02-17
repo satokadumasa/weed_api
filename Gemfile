@@ -49,3 +49,6 @@ gem 'bcrypt'
 
 # dotenv
 gem 'dotenv-rails'
+
+gem 'will_paginate'
+
