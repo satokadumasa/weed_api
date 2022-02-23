@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  get '/users/me', to: 'users#me'
   resources :books
+  resources :users
 
   mount_devise_token_auth_for 'User', at: 'auth', skip: [:registrations]
   devise_scope :user do
@@ -7,5 +9,4 @@ Rails.application.routes.draw do
     put '/account' => 'devise_token_auth/registrations#update'
     delete '/account' => 'devise_token_auth/registrations#destroy'
   end
-  get '/user/me', to: 'user#me'
 end
