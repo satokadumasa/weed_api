@@ -6,4 +6,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  has_many :notes
+  has_many :pages
+  has_one :user_role
+  has_many :roles, through: :user_roles
+  has_many :boards
+  has_many :board_comments, through: :boards
 end

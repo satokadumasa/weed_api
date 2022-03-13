@@ -10,14 +10,68 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_04_080118) do
+ActiveRecord::Schema.define(version: 2022_02_23_035108) do
 
-  create_table "books", charset: "utf8mb4", force: :cascade do |t|
+  create_table "board_comments", charset: "utf8mb4", force: :cascade do |t|
     t.integer "user_id"
-    t.string "title"
+    t.integer "board_id"
+    t.string "title", limit: 64
     t.text "detail"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_board_comments_on_board_id"
+    t.index ["title"], name: "index_board_comments_on_title"
+    t.index ["user_id"], name: "index_board_comments_on_user_id"
+  end
+
+  create_table "boards", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title", limit: 64
+    t.text "detail"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["title"], name: "index_boards_on_title"
+    t.index ["user_id"], name: "index_boards_on_user_id"
+  end
+
+  create_table "notes", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title", limit: 64
+    t.text "overview"
+    t.text "detail"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["title"], name: "index_notes_on_title"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "pages", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "note_id"
+    t.string "title", limit: 64
+    t.text "overview"
+    t.text "detail"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["note_id"], name: "index_pages_on_note_id"
+    t.index ["title"], name: "index_pages_on_title"
+    t.index ["user_id"], name: "index_pages_on_user_id"
+  end
+
+  create_table "roles", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", limit: 32
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_roles_on_name"
+  end
+
+  create_table "user_roles", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id"], name: "index_user_roles_on_role_id"
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|

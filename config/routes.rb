@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  resources :board_comments
+  resources :boards
+  resources :pages
+  resources :notes
+  resources :user_roles
+  resources :roles
   get '/users/me', to: 'users#me'
-  resources :books
   resources :users
 
   mount_devise_token_auth_for 'User', at: 'auth', skip: [:registrations]

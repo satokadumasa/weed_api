@@ -50,5 +50,5 @@ gem 'bcrypt'
 # dotenv
 gem 'dotenv-rails'
 
-gem 'will_paginate'
-
+# gem 'will_paginate'
+gem 'kaminari'
