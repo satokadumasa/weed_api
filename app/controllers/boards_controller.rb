@@ -4,13 +4,14 @@ class BoardsController < ApplicationController
 
   # GET /boards
   def index
-    @boards = Board.all.page(params[:page]).per(10)
+    @boards = Board.all.page(params[:page]).per(params[:per])
     @count = Board.count
     render json: {boards: @boards, count: @count}
   end
 
   # GET /boards/1
   def show
+    @board.detail = @board.detail
     render json: @board
   end
 
@@ -18,6 +19,8 @@ class BoardsController < ApplicationController
   def create
     pp "----------------"
     pp current_user
+    pp "----------------"
+    pp board_params
     pp "----------------"
     @board = Board.new(board_params)
     @board.user_id = current_user.id
