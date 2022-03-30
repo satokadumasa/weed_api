@@ -4,7 +4,8 @@ class PagesController < ApplicationController
 
   # GET /pages
   def index
-    @pages = Page.all
+    @pages = Page.all.page(params[:page]).per(params[:per])
+    @count = Page.count
 
     render json: @pages
   end
