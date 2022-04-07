@@ -4,7 +4,7 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    @notes = Note.all.page(params[:page]).per(params[:per])
+    @notes = Note.all.order(id: "DESC").page(params[:page]).per(params[:per])
     @count = Note.count
     render json: {notes: @notes, count: @count}
   end

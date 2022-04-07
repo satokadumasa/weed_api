@@ -4,7 +4,7 @@ class BoardsController < ApplicationController
 
   # GET /boards
   def index
-    @boards = Board.all.page(params[:page]).per(params[:per])
+    @boards = Board.all.order(id: "DESC").page(params[:page]).per(params[:per])
     @count = Board.count
     render json: {boards: @boards, count: @count}
   end
@@ -17,11 +17,6 @@ class BoardsController < ApplicationController
 
   # POST /boards
   def create
-    pp "----------------"
-    pp current_user
-    pp "----------------"
-    pp board_params
-    pp "----------------"
     @board = Board.new(board_params)
     @board.user_id = current_user.id
 
@@ -34,13 +29,6 @@ class BoardsController < ApplicationController
 
   # PATCH/PUT /boards/1
   def update
-    pp "----------------"
-    pp "update"
-    pp "----------------"
-    pp current_user
-    pp "----------------"
-    pp board_params
-    pp "----------------"
     if @board.update(board_params)
       render json: @board
     else
