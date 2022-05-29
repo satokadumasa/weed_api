@@ -4,7 +4,7 @@ class PagesController < ApplicationController
 
   # GET /pages
   def index
-    @pages = Page.all.page(params[:page]).per(params[:per])
+    @pages = Page.all.where(note_id: params[:note_id]).page(params[:page]).per(params[:per])
     @count = Page.count
 
     render json: @pages

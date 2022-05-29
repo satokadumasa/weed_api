@@ -3,8 +3,8 @@ class BoardCommentsController < ApplicationController
 
   # GET /board_comments
   def index
-    @board_comments = BoardComment.all
-
+    @board_comments = BoardComment.where({board_id: paraams[:board_id]).page(params[:page]).per(params[:per]).all
+    @board = @board_comments[1]
     render json: @board_comments
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_23_035108) do
+ActiveRecord::Schema.define(version: 2022_04_17_040630) do
 
   create_table "board_comments", charset: "utf8mb4", force: :cascade do |t|
     t.integer "user_id"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2022_02_23_035108) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["title"], name: "index_notes_on_title"
     t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
+  create_table "page_comments", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "page_id"
+    t.string "title"
+    t.text "detail"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "pages", charset: "utf8mb4", force: :cascade do |t|
